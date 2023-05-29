@@ -18,7 +18,7 @@ module.exports = {
       name: "Super Admin",
       email: "admin@gmail.com",
       phone_number: "0812831282",
-      password: "adminadmin",
+      password: "$2b$10$gaFo8n.8LoYbkcdyldoEUepAHSXE3zh12/6/Qg8eHe2NxUFv82w0a", //adminadmin
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -27,7 +27,7 @@ module.exports = {
       name: "Dion Wiyoko",
       email: "dion@gmail.com",
       phone_number: "0812831283",
-      password: "diongantnk",
+      password: "$10$k/gIw9n9KQZGkWPC05uI3exCdos5YVDKXxfeNfAq4F/qphm8plkBm", //123
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -36,7 +36,7 @@ module.exports = {
       name: "Waluyo Suherman",
       email: "waluyo@gmail.com",
       phone_number: "0812831284",
-      password: "waluyogantnk",
+      password: "$10$k/gIw9n9KQZGkWPC05uI3exCdos5YVDKXxfeNfAq4F/qphm8plkBm", //123
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -45,7 +45,7 @@ module.exports = {
       name: "Adi Purwanto",
       email: "adi@gmail.com",
       phone_number: "0812831285",
-      password: "adigantnk",
+      password: "$10$k/gIw9n9KQZGkWPC05uI3exCdos5YVDKXxfeNfAq4F/qphm8plkBm", //123
       createdAt: new Date(),
       updatedAt: new Date()
     }
