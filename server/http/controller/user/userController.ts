@@ -7,13 +7,17 @@ export class UserController {
     async getAllUser(req: Request, res: Response) {
         try {
             const result = await new UserRepository().getAllUser();
-            res.send({
+            res.status(200).send({
                 status: 200,
                 message: "Success",
                 data: result
             });
         } catch (error) {
-            res.send(error);
+            res.status(500).send({
+                status: 500,
+                message: "Internal Server Error",
+                data: {}
+            })
         }
     }
 
@@ -21,26 +25,34 @@ export class UserController {
         try {
             const {id} = req.body
             const result = await new UserRepository().getUserById(id as unknown as number);
-            res.send({
+            res.status(200).send({
                 status: 200,
                 message: "Success",
                 data: result
             });
         } catch (error) {
-            res.send(error);
+            res.status(500).send({
+                status: 500,
+                message: "Internal Server Error",
+                data: {}
+            })
         }
     }
 
     async createUser(req: Request, res: Response) {
         try {
             const result = await new UserCommand().createUser(req.body);
-            res.send({
-                status: 200,
+            res.status(201).send({
+                status: 201,
                 message: "Success",
                 data: result
             });
         } catch (error) {
-            res.send(error);
+            res.status(500).send({
+                status: 500,
+                message: "Internal Server Error",
+                data: {}
+            })
         }
     }
 }

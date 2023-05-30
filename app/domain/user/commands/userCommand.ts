@@ -18,7 +18,7 @@ export class UserCommand{
             return await this.userQuery.createUser(userModel.getDataUserArr());
         }
         catch(error){
-            return error;
+            throw error;
         }        
     }
 }

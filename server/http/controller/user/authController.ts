@@ -8,15 +8,16 @@ export class AuthController{
         try {
             const result = await new UserRepository().findUserByEmail(req.body.email);
             if(!result){
-                res.send({
-                    status: 404,
-                    message: "User not found",
+                res.status(400).send({
+                    status: 400,
+                    message: "Email not found",
                     data: {}
                 });
             }
             if(await PasswordUtils.comparePassword(req.body.password, result.password)){
                 const token = jwt.sign({ email: result.email, role: result.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-                res.send({
+                console.log("success login");
+                res.status(200).send({
                     status: 200,
                     message: "Success",
                     data: {
@@ -24,14 +25,18 @@ export class AuthController{
                     }
                 });
             }else{
-                res.send({
+                res.status(400).send({
                     status: 400,
-                    message: "email or password is wrong",
+                    message: "Wrong password",
                     data: {}
                 });
             }
         } catch (error) {
-            res.send(error);
+            res.status(500).send({
+                status: 500,
+                message: "Internal Server Error",
+                data: {}
+            })
         }
     }
 
@@ -40,20 +45,25 @@ export class AuthController{
             const result = await new UserRepository().findUserByEmail(req.body.email);
             console.log(result);
             if(result.email === req.body.email){
-                res.send({
+                res.status(400).send({
                     status: 400,
-                    message: "User already exist",
+                    message: "Email already exist",
                     data: {}
                 });
             }
             const data = await new UserCommand().createUser(req.body);
-            res.send({
-                status: 200,
+            console.log("success register");
+            res.status(201).send({
+                status: 201,
                 message: "Success",
                 data: data
             });
         } catch (error) {
-            res.send(error);
+            res.status(500).send({
+                status: 500,
+                message: "Internal Server Error",
+                data: {}
+            })
         }
     }
 }
