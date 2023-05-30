@@ -1,4 +1,5 @@
 'use strict';
+const bcrypt = require('bcrypt');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -12,13 +13,15 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+    const adminPassword = await bcrypt.hash("adminadmin", 10);
+    const userPassword = await bcrypt.hash("123", 10);
     await queryInterface.bulkInsert('users', [{
       id: "USR0001",
       role_id: "RL0001",
       name: "Super Admin",
       email: "admin@gmail.com",
       phone_number: "0812831282",
-      password: "$2b$10$gaFo8n.8LoYbkcdyldoEUepAHSXE3zh12/6/Qg8eHe2NxUFv82w0a", //adminadmin
+      password: adminPassword,
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -27,7 +30,7 @@ module.exports = {
       name: "Dion Wiyoko",
       email: "dion@gmail.com",
       phone_number: "0812831283",
-      password: "$2b$10$gaFo8n.8LoYbkcdyldoEUepAHSXE3zh12/6/Qg8eHe2NxUFv82w0a", //123
+      password: userPassword,
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -36,7 +39,7 @@ module.exports = {
       name: "Waluyo Suherman",
       email: "waluyo@gmail.com",
       phone_number: "0812831284",
-      password: "$2b$10$gaFo8n.8LoYbkcdyldoEUepAHSXE3zh12/6/Qg8eHe2NxUFv82w0a", //123
+      password: userPassword,
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -45,7 +48,7 @@ module.exports = {
       name: "Adi Purwanto",
       email: "adi@gmail.com",
       phone_number: "0812831285",
-      password: "$2b$10$gaFo8n.8LoYbkcdyldoEUepAHSXE3zh12/6/Qg8eHe2NxUFv82w0a", //123
+      password: userPassword,
       createdAt: new Date(),
       updatedAt: new Date()
     }
