@@ -43,7 +43,6 @@ export class AuthController{
     async register(req: any, res: any){
         try {
             const result = await new UserRepository().findUserByEmail(req.body.email);
-            console.log(result);
             if(result.email === req.body.email){
                 res.status(400).send({
                     status: 400,
