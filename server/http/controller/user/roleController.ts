@@ -7,26 +7,34 @@ export class RoleController {
     async getAllRole(req: Request, res: Response) {
         try {
             const result = await new RoleRepository().getAllRole();
-            res.send({
+            res.status(200).send({
                 status: 200,
                 message: "Success",
                 data: result
             });
         } catch (error) {
-            res.send(error);
+            res.status(500).send({
+                status: 500,
+                message: "Internal Server Error",
+                data: {}
+            })
         }
     }
 
     async createRole(req: Request, res: Response) {
         try {
             const result = await new RoleCommand().createRole(req.body);
-            res.send({
-                status: 200,
+            res.status(201).send({
+                status: 201,
                 message: "Success",
                 data: result
             });
         } catch (error) {
-            res.send(error);
+            res.status(500).send({
+                status: 500,
+                message: "Internal Server Error",
+                data: {}
+            })
         }
     }
 }
