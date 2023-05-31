@@ -76,7 +76,9 @@ export class AuthController{
                 message: "Success",
                 data: {
                     email: result.email,
-                    role: result.role
+                    role: result.role,
+                    username: result.name,
+                    phone: result.phone
                 }
             });
         } catch (error) {
