@@ -15,9 +15,9 @@ export class AuthQuery implements AuthQueryInterface {
         });
         return fetchData.then((res: any) => {
             if(!res[0][0]){
-                return new AuthDTO("", "", "");
+                return new AuthDTO("", "", "", "", "");
             }
-            const data: AuthDTO = new AuthDTO(res[0][0].email, res[0][0].role_name, res[0][0].password);
+            const data: AuthDTO = new AuthDTO(res[0][0].email, res[0][0].role_name, res[0][0].password, res[0][0].name, res[0][0].phone_number);
             return data;
         });
     }

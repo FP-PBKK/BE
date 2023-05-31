@@ -2,6 +2,8 @@ export class AuthDTO{
     constructor(
         public email: string,
         public role: string,
-        public password: string
+        public password: string,
+        public name: string,
+        public phone: string,
     ){}
 }
