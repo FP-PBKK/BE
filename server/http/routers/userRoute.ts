@@ -28,6 +28,8 @@ export class UserRoute {
         //auth
         router.post("/login", this.authController.login);
         router.post("/register", this.authController.register);
+        router.get("/whoami", this.authController.whoami);
+        
         return router;
     }
 }
