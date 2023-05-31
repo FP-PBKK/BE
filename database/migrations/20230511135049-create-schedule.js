@@ -15,6 +15,10 @@ module.exports = {
       time: {
         type: Sequelize.TIME
       },
+      isBooked: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
