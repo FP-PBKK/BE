@@ -4,6 +4,7 @@ const cors = require('cors');
 const multer = require('multer');
 const morgan = require('morgan');
 import { UserRoute } from "./routers/userRoute";
+import { BookingRoute } from "./routers/bookingRoute";
 
 // Add CORS middleware
 app.use(cors());
@@ -20,8 +21,10 @@ app.use(express.static('public'));
 app.use(morgan('combined'));
 
 const userRoute = new UserRoute();
+const bookingRoute = new BookingRoute();
 
 //routes
 app.use("/api/user", userRoute.routes);
+app.use("/api/booking", bookingRoute.routes);
 
 export { app };
