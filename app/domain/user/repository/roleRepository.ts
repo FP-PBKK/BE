@@ -8,6 +8,11 @@ export class RoleRepository {
     }
 
     async getAllRole() {
-        return this.roleQuery.getAllRole();
+        try{
+            return this.roleQuery.getAllRole();
+        }
+        catch(err){
+            throw err;
+        }
     }
 }

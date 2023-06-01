@@ -20,7 +20,8 @@ export class PackageController {
         catch(err){
             res.status(500).send({
                 status: 500,
-                message: err
+                message: "Internal Server Error",
+                data: err
             });
         }
     }
@@ -37,7 +38,8 @@ export class PackageController {
         catch(err){
             res.status(500).send({
                 status: 500,
-                message: err
+                message: "Internal Server Error",
+                data: err
             });
         }
     }

@@ -14,8 +14,8 @@ export class ScheduleController {
         } catch (error) {
             res.status(500).send({
                 status: 500,
-                message: error,
-                data: {}
+                message: "Internal Server Error",
+                data: error
             });
         }
     }
@@ -32,8 +32,8 @@ export class ScheduleController {
         } catch (error) {
             res.status(500).send({
                 status: 500,
-                message: error,
-                data: {}
+                message: "Internal Server Error",
+                data: error
             });
         }
     }
@@ -50,8 +50,8 @@ export class ScheduleController {
         } catch (error) {
             res.status(500).send({
                 status: 500,
-                message: error,
-                data: {}
+                message: "Internal Server Error",
+                data: error
             });
         }
     }

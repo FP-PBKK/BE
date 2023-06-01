@@ -8,14 +8,29 @@ export class ScheduleRepository {
     }
 
     async getAllSchedule() {
-        return this.scheduleQuery.getAllSchedule();
+        try{
+            return this.scheduleQuery.getAllSchedule();
+        }
+        catch(err){
+            throw err;
+        }
     }
 
     async getScheduleById(id: string) {
-        return this.scheduleQuery.getScheduleById(id);
+        try{
+            return this.scheduleQuery.getScheduleById(id);
+        }
+        catch(err){
+            throw err;
+        }
     }
 
     async getScheduleByDateTime(date: string, time: string) {
-        return this.scheduleQuery.getScheduleByDateTime(date, time);
+        try{
+            return this.scheduleQuery.getScheduleByDateTime(date, time);
+        }
+        catch(err){
+            throw err;
+        }
     }
 }
