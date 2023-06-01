@@ -34,7 +34,7 @@ module.exports = {
       id: "BOK202304220001",
       user_id: "USR0004",
       transaction_id: "TRS202304220001",
-      schedules_id : "SCH20230422.0900",
+      schedules_id : "SCH20230524.1100",
       packages_id : "PKG0003",
       booking_statuses_id : "BS0003",
       createdAt: new Date(),

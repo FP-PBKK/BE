@@ -20,4 +20,24 @@ export class BookingQuery implements BookingQueryInterface {
             throw err;
         }
     }
+
+    async getBookingById(id: string): Promise<BookingDTO> {
+        try{
+            const sql = `SELECT * FROM bookings WHERE id = :id`;
+            const fetchData = sequelize.query(sql, {
+                replacements: {
+                    id: id
+                }
+            });
+            return fetchData.then((element: any) => {
+                if(!element[0][0]){
+                    return new BookingDTO('', '', '', '', '', '');
+                }
+                return new BookingDTO(element[0][0].id, element[0][0].user_id, element[0][0].schedules_id, element[0][0].packages_id, element[0][0].booking_statuses_id, element[0][0].transaction_id);
+            });
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

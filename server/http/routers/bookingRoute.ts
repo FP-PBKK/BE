@@ -34,6 +34,7 @@ export class BookingRoute {
 
         //booking
         router.get("/bookings", this.bookingController.getAllBooking);
+        router.post("/bookingbyid", this.bookingController.getBookingById);
         
         return router;
     }

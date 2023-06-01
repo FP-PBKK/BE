@@ -1,6 +1,7 @@
 import { UserDTO } from "../user/userDTO";
 import { ScheduleDTO } from "./scheduleDTO";
 import { PackageDTO } from "./packageDTO";
+import { TransactionDTO } from "../transaction/transactionDTO";
 
 export class BookingDTO{
     constructor(
@@ -13,5 +14,7 @@ export class BookingDTO{
         public user?: UserDTO,
         public schedule?: ScheduleDTO,
         public packagePhoto?: PackageDTO,
+        public additionalItem?: any[],
+        public transaction?: TransactionDTO,
     ){}
 }
