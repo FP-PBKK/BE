@@ -10,6 +10,9 @@ export class RoleQuery implements RoleQueryInterface {
             const fetchData = sequelize.query(sql);
             return fetchData.then((res: any) => {
                 const data: RoleDTO[] = [];
+                if(!res[0]){
+                    return data;
+                }
                 res[0].forEach((element: any) => {
                     data.push(new RoleDTO(element.id, element.name));
                 });

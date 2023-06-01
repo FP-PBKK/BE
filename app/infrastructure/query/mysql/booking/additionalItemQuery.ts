@@ -10,6 +10,9 @@ export class AdditionalItemQuery implements AdditionalItemInterface {
             const fetchData = sequelize.query(sql);
             return fetchData.then((res: any) => {
                 const data: AdditionalItemDTO[] = [];
+                if(!res[0]){
+                    return data;
+                }
                 res[0].forEach((element: any) => {
                     data.push(new AdditionalItemDTO(element.id, element.name, element.price, element.description));
                 });

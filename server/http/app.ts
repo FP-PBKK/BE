@@ -5,6 +5,7 @@ const multer = require('multer');
 const morgan = require('morgan');
 import { UserRoute } from "./routers/userRoute";
 import { BookingRoute } from "./routers/bookingRoute";
+import { TransactionRoute } from "./routers/transactionRoute";
 
 // Add CORS middleware
 app.use(cors());
@@ -22,9 +23,11 @@ app.use(morgan('combined'));
 
 const userRoute = new UserRoute();
 const bookingRoute = new BookingRoute();
+const transactionRoute = new TransactionRoute();
 
 //routes
 app.use("/api/user", userRoute.routes);
 app.use("/api/booking", bookingRoute.routes);
+app.use("/api/transaction", transactionRoute.routes);
 
 export { app };
