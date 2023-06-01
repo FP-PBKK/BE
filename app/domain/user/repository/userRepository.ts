@@ -11,14 +11,29 @@ export class UserRepository {
     }
 
     async getAllUser() {
-        return await this.userQuery.getAllUser();
+        try{
+            return await this.userQuery.getAllUser();
+        }
+        catch(err){
+            throw err;
+        }
     }
 
     async getUserById(id: number) {
-        return await this.userQuery.getUserById(id);
+        try{
+            return await this.userQuery.getUserById(id);
+        }
+        catch(err){
+            throw err;
+        }
     }
 
     async findUserByEmail(email: string) {
-        return await this.authQuery.findUserByEmail(email);
+        try{
+            return await this.authQuery.findUserByEmail(email);
+        }
+        catch(err){
+            throw err;
+        }
     }
 }
