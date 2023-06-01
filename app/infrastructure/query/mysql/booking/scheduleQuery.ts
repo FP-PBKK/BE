@@ -10,6 +10,9 @@ export class ScheduleQuery implements ScheduleQueryInterface {
                 const fetchData = sequelize.query(sql);
                 return fetchData.then((res: any) => {
                     const data: ScheduleDTO[] = [];
+                    if(!res[0]){
+                        return data;
+                    }
                     res[0].forEach((element: any) => {
                         const isBooked = element.isBooked === 1 ? true : false;
                         data.push(new ScheduleDTO(element.id, element.date, element.time, isBooked, element.createdAt, element.updatedAt));
@@ -29,6 +32,9 @@ export class ScheduleQuery implements ScheduleQueryInterface {
                     replacements: [id]
                 });
                 return fetchData.then((res: any) => {
+                    if(!res[0][0]){
+                        return new ScheduleDTO('', '', '', false, '', '');
+                    }
                     const isBooked = res[0][0].isBooked === 1 ? true : false;
                     const data: ScheduleDTO = new ScheduleDTO(res[0][0].id, res[0][0].date, res[0][0].time, isBooked, res[0][0].createdAt, res[0][0].updatedAt);
                     return data;
@@ -47,6 +53,9 @@ export class ScheduleQuery implements ScheduleQueryInterface {
                 });
                 return fetchData.then((res: any) => {
                     const data: ScheduleDTO[] = [];
+                    if(!res[0]){
+                        return data;
+                    }
                     res[0].forEach((element: any) => {
                         const isBooked = element.isBooked === 1 ? true : false;
                         data.push(new ScheduleDTO(element.id, element.date, element.time, isBooked, element.createdAt, element.updatedAt));

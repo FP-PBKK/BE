@@ -19,7 +19,7 @@ export class UserRepository {
         }
     }
 
-    async getUserById(id: number) {
+    async getUserById(id: string) {
         try{
             return await this.userQuery.getUserById(id);
         }

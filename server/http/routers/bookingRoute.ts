@@ -4,16 +4,19 @@ const router = express.Router();
 import { PackageController } from "../controller/booking/packageController";
 import { ScheduleController } from "../controller/booking/scheduleController";
 import { AdditionalItemController } from "../controller/booking/additioanlController";
+import { BookingController } from "../controller/booking/bookingControlller";
 
 export class BookingRoute {
     private packageController: PackageController;
     private scheduleController: ScheduleController;
     private additionalItemController: AdditionalItemController;
+    private bookingController: BookingController;
 
     constructor() {
         this.packageController = new PackageController();
         this.scheduleController = new ScheduleController();
         this.additionalItemController = new AdditionalItemController();
+        this.bookingController = new BookingController();
     }
 
     public get routes() {
@@ -28,6 +31,9 @@ export class BookingRoute {
 
         //additional item
         router.get("/additionalitems", this.additionalItemController.getAllAdditionalItem);
+
+        //booking
+        router.get("/bookings", this.bookingController.getAllBooking);
         
         return router;
     }
