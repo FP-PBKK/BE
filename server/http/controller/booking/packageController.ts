@@ -28,7 +28,8 @@ export class PackageController {
 
     public getPackageById = async (req: Request, res: Response) => {
         try{
-            const data = await this.packageRepository.getPackageById(req.body.id);
+            const {id} = req.params;
+            const data = await this.packageRepository.getPackageById(id);
             res.status(200).send({
                 status: 200,
                 message: "Success",

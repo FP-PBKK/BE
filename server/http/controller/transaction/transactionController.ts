@@ -23,7 +23,7 @@ export class TransactionController {
 
     async getTransactionById(req: Request, res: Response){
         try{
-            const {id} = req.body;
+            const {id} = req.params;
             const data = await new TransactionRepository().getTransactionById(id);
             res.status(200).json({
                 status: 200,

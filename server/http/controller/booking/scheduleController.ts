@@ -22,7 +22,7 @@ export class ScheduleController {
 
     async getScheduleById(req: Request, res: Response) {
         try {
-            const {id} = req.body;
+            const {id} = req.params;
             const data = await new ScheduleRepository().getScheduleById(id);
             res.status(200).send({
                 status: 200,

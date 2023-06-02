@@ -85,7 +85,7 @@ export class AuthController{
             res.status(500).send({
                 status: 500,
                 message: "Internal Server Error",
-                data: {}
+                data: error
             })
         }
     }
