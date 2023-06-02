@@ -23,8 +23,8 @@ export class UserController {
 
     async getUserById(req: Request, res: Response) {
         try {
-            const {id} = req.body
-            const result = await new UserRepository().getUserById(id);
+            const {id} = req.params;
+            const result = await new UserRepository().getUserById(id as string);
             res.status(200).send({
                 status: 200,
                 message: "Success",

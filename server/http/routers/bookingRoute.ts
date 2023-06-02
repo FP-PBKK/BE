@@ -22,19 +22,19 @@ export class BookingRoute {
     public get routes() {
         //schedule
         router.get("/schedules", this.scheduleController.getAllSchedule);
-        router.post("/schedulebyid", this.scheduleController.getScheduleById);
+        router.get("/schedule/:id", this.scheduleController.getScheduleById);
         router.post("/schedulebydatetime", this.scheduleController.getScheduleByDateTime);
 
         //package
         router.get("/packages", this.packageController.getAllPackage);
-        router.post("/packagebyid", this.packageController.getPackageById);
+        router.get("/package/:id", this.packageController.getPackageById);
 
         //additional item
         router.get("/additionalitems", this.additionalItemController.getAllAdditionalItem);
 
         //booking
         router.get("/bookings", this.bookingController.getAllBooking);
-        router.post("/bookingbyid", this.bookingController.getBookingById);
+        router.get("/booking/:id", this.bookingController.getBookingById);
         
         return router;
     }

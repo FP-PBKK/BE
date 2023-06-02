@@ -23,8 +23,8 @@ export class BookingController {
 
     async getBookingById(req: Request, res: Response){
         try{
-            const {bookingId} = req.body;
-            const bookingData = await new BookingService().getBookingByIdAndReferences(bookingId);
+            const {id} = req.params;
+            const bookingData = await new BookingService().getBookingByIdAndReferences(id);
             return res.status(200).json({
                 status: 200,
                 message: "Success",

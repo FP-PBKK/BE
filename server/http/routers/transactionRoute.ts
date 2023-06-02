@@ -12,7 +12,7 @@ export class TransactionRoute{
     public get routes(){
         const controller = this.transactionController;
         router.get("/", controller.getAllTransactions);
-        router.post("/getbyid", controller.getTransactionById);
+        router.get("/:id", controller.getTransactionById);
         return router;
     }
 }
