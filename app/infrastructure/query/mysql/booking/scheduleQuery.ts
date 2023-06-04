@@ -1,6 +1,7 @@
 import { ScheduleQueryInterface } from "../../../../application/query/booking/scheduleQueryInterface";
 import { ScheduleDTO } from "../../../../application/query/booking/scheduleDTO";
 import { sequelize } from "../../../../../config/database";
+import { BookedScheduleDTO } from "../../../../application/query/booking/bookedScheduleDTO";
 
 export class ScheduleQuery implements ScheduleQueryInterface {
     
@@ -45,11 +46,11 @@ export class ScheduleQuery implements ScheduleQueryInterface {
             }
         }
     
-        async getScheduleByDateTime(date: string, time: string): Promise<ScheduleDTO[]> {
+        async getScheduleByTime(time: string): Promise<ScheduleDTO[]> {
             try{
-                const sql = `SELECT * FROM schedules WHERE date = ? AND time = ?`;
+                const sql = `SELECT * FROM schedules WHERE time = ?`;
                 const fetchData = sequelize.query(sql, {
-                    replacements: [date, time]
+                    replacements: [time]
                 });
                 return fetchData.then((res: any) => {
                     const data: ScheduleDTO[] = [];
@@ -59,6 +60,37 @@ export class ScheduleQuery implements ScheduleQueryInterface {
                     res[0].forEach((element: any) => {
                         const isBooked = element.isBooked === 1 ? true : false;
                         data.push(new ScheduleDTO(element.id, element.date, element.time, isBooked, element.createdAt, element.updatedAt));
+                    });
+                    return data;
+                });
+            }
+            catch(err){
+                throw err;
+            }
+        }
+
+        async getBookedByDate(date: string): Promise<BookedScheduleDTO[]> {
+            try{
+                const sql = `SELECT schedules.id, schedules.time
+                                FROM schedules
+                                LEFT JOIN bookings ON schedules.id = bookings.schedules_id
+                                LEFT JOIN transactions ON bookings.transaction_id = transactions.id
+                                WHERE DATE(transactions.updatedAt) = :date
+                                AND transactions.paid = :paid
+                                `;
+                const fetchData = sequelize.query(sql, {
+                    replacements: {
+                        date: date,
+                        paid: true
+                    }
+                });
+                return fetchData.then((res: any) => {
+                    const data: BookedScheduleDTO[] = [];
+                    if(!res[0]){
+                        return data;
+                    }
+                    res[0].forEach((element: any) => {
+                        data.push(new BookedScheduleDTO(element.id, element.time));
                     });
                     return data;
                 });

@@ -25,9 +25,18 @@ export class ScheduleRepository {
         }
     }
 
-    async getScheduleByDateTime(date: string, time: string) {
+    async getScheduleByTime(time: string) {
         try{
-            return this.scheduleQuery.getScheduleByDateTime(date, time);
+            return this.scheduleQuery.getScheduleByTime(time);
+        }
+        catch(err){
+            throw err;
+        }
+    }
+
+    async getBookedScheduleByDate(date: string) {
+        try{
+            return this.scheduleQuery.getBookedByDate(date);
         }
         catch(err){
             throw err;

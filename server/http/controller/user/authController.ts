@@ -70,7 +70,8 @@ export class AuthController{
         try {
             const token = req.headers.authorization.split(" ")[1];
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            const result = await new UserRepository().findUserByEmail(decoded.email);
+            console.log("decode: ", decoded);
+            const result = await new UserRepository().findUserByEmail(decoded.email);            
             res.status(200).send({
                 status: 200,
                 message: "Success",
