@@ -22,12 +22,13 @@ export class BookingRoute {
     public get routes() {
         //schedule
         router.get("/schedules", this.scheduleController.getAllSchedule);
-        router.get("/schedule/:id", this.scheduleController.getScheduleById);
-        router.post("/schedulebydatetime", this.scheduleController.getScheduleByDateTime);
+        router.get("/schedule/id/:id", this.scheduleController.getScheduleById);
+        router.post("/schedulebytime", this.scheduleController.getScheduleByTime);
+        router.post("/schedule/booked", this.scheduleController.getBookedScheduleByDate);
 
         //package
         router.get("/packages", this.packageController.getAllPackage);
-        router.get("/package/:id", this.packageController.getPackageById);
+        router.get("/package/id/:id", this.packageController.getPackageById);
 
         //additional item
         router.get("/additionalitems", this.additionalItemController.getAllAdditionalItem);

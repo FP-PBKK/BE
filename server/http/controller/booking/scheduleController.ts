@@ -1,5 +1,7 @@
 import { ScheduleRepository } from "../../../../app/domain/booking/repository/scheduleRepository";
+import { BookingService } from "../../../../app/domain/booking/service/bookingService";
 import {Request, Response} from "express";
+import { ScheduleService } from "../../../../app/domain/booking/service/scheduleService";
 
 export class ScheduleController {
 
@@ -38,10 +40,28 @@ export class ScheduleController {
         }
     }
 
-    async getScheduleByDateTime(req: Request, res: Response) {
+    async getScheduleByTime(req: Request, res: Response) {
         try {
-            const {date, time} = req.body;
-            const data = await new ScheduleRepository().getScheduleByDateTime(date, time);
+            const {time} = req.body;
+            const data = await new ScheduleRepository().getScheduleByTime(time);
+            res.status(200).send({
+                status: 200,
+                message: "Success",
+                data: data
+            });
+        } catch (error) {
+            res.status(500).send({
+                status: 500,
+                message: "Internal Server Error",
+                data: error
+            });
+        }
+    }
+
+    async getBookedScheduleByDate(req: Request, res: Response) {
+        try {
+            const {date} = req.body;
+            const data = await new ScheduleService().getBookedScheduleByDate(date);
             res.status(200).send({
                 status: 200,
                 message: "Success",

@@ -18,7 +18,7 @@ export class UserRoute {
     public get routes() {
         //user
         router.get("/", this.userController.getAllUser);
-        router.get("/:id", this.userController.getUserById);
+        router.get("/id/:id", this.userController.getUserById);
         router.post("/", this.userController.createUser);
 
         //role
