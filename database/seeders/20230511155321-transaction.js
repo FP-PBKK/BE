@@ -19,6 +19,7 @@ module.exports = {
       paid: true,
       discount_id: "MEICERIYA",
       qris_id: "ID012121290192121",
+      booking_id: "BOK202305110001",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -28,6 +29,7 @@ module.exports = {
       paid: false,
       discount_id: null,
       qris_id: "ID012121290192121",
+      booking_id: "BOK202305110002",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -37,6 +39,7 @@ module.exports = {
       paid: true,
       discount_id: "LEBARANSERU",
       qris_id: "ID012121290192121",
+      booking_id: "BOK202304220001",
       createdAt: new Date(),
       updatedAt: new Date()
     }

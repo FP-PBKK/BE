@@ -15,28 +15,25 @@ module.exports = {
     await queryInterface.bulkInsert('bookings', [{
       id: "BOK202305110001",
       user_id: "USR0002",
-      transaction_id: "TRS202305110001",
       schedules_id : "SCH0800",
       packages_id : "PKG0001",
-      booking_statuses_id : "BS0002",
+      booking_status : "finish",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
       id: "BOK202305110002",
       user_id: "USR0003",
-      transaction_id: "TRS202305110002",
       schedules_id : "SCH0900",
       packages_id : "PKG0002",
-      booking_statuses_id : "BS0001",
+      booking_status : "paid",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
       id: "BOK202304220001",
       user_id: "USR0004",
-      transaction_id: "TRS202304220001",
       schedules_id : "SCH1100",
       packages_id : "PKG0003",
-      booking_statuses_id : "BS0003",
+      booking_status : "paid",
       createdAt: new Date(),
       updatedAt: new Date()
     }

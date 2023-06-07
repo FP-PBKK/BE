@@ -7,10 +7,10 @@ export class AuthController{
     async login(req: any, res: any){
         try {
             const result = await new UserRepository().findUserByEmail(req.body.email);
-            if(!result){
-                res.status(400).send({
-                    status: 400,
-                    message: "Email not found",
+            if(!result || result.name.length == 0){
+                return res.status(404).send({
+                    status: 404,
+                    message: "user not found",
                     data: {}
                 });
             }
@@ -76,6 +76,7 @@ export class AuthController{
                 status: 200,
                 message: "Success",
                 data: {
+                    id: result.id,
                     email: result.email,
                     role: result.role,
                     username: result.name,

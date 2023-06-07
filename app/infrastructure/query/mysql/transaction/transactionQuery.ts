@@ -5,14 +5,15 @@ import { sequelize } from "../../../../../config/database";
 export class TransactionQuery implements TransactionQueryInterface {
     async getAllTransactions(): Promise<TransactionDTO[]> {
         try{
-            const sql = `SELECT * FROM transactions`;
+            const sql = `SELECT * FROM transactions
+                        ORDER BY createdAt ASC`;
             const fetchData = await sequelize.query(sql);
             const data: TransactionDTO[] = [];
             if(!fetchData[0]){
                 return data;
             }
             fetchData[0].forEach((element: any) => {
-                data.push(new TransactionDTO(element.id, element.total, element.is_paid, element.created_at, element.updated_at, element.discount_id, element.qris_id));
+                data.push(new TransactionDTO(element.id, element.total, element.paid, element.booking_id, element.qris_id, element.created_at, element.updated_at, element.discount_id));
             });
             return data;
         }
@@ -23,7 +24,8 @@ export class TransactionQuery implements TransactionQueryInterface {
 
     async getTransactionById(id: string): Promise<TransactionDTO> {
         try{
-            const sql = `SELECT * FROM transactions WHERE id = :id`;
+            const sql = `SELECT * FROM transactions WHERE id = :id
+                        ORDER BY createdAt ASC`;
             const fetchData = sequelize.query(sql, {
                 replacements: {
                     id: id
@@ -31,9 +33,9 @@ export class TransactionQuery implements TransactionQueryInterface {
             });
             return fetchData.then((element: any) => {
                 if(!element[0][0]){
-                    return new TransactionDTO('', 0, false, '', '', '', 0);
+                    return new TransactionDTO('', 0, false, '', '', '', '');
                 }
-                return new TransactionDTO(element[0][0].id, element[0][0].total, element[0][0].is_paid, element[0][0].created_at, element[0][0].updated_at, element[0][0].discount_id, element[0][0].qris_id);
+                return new TransactionDTO(element[0][0].id, element[0][0].total, element[0][0].paid, element[0][0].booking_id, element[0][0].qris_id, element[0][0].created_at, element[0][0].updated_at, element[0][0].discount_id);
             });
         }
         catch(err){

@@ -5,14 +5,15 @@ import { sequelize } from "../../../../../config/database";
 export class BookingQuery implements BookingQueryInterface {
     async getAllBooking(): Promise<BookingDTO[]> {
         try{
-            const bookingSql = `SELECT * FROM bookings`;
+            const bookingSql = `SELECT * FROM bookings
+                                ORDER BY createdAt ASC`;
             const bookingFetchData = await sequelize.query(bookingSql);
             const bookingData: BookingDTO[] = [];
             if(!bookingFetchData[0]){
                 return bookingData;
             }
             bookingFetchData[0].forEach((element: any) => {
-                bookingData.push(new BookingDTO(element.id, element.user_id, element.schedules_id, element.packages_id, element.booking_statuses_id, element.transaction_id));
+                bookingData.push(new BookingDTO(element.id, element.user_id, element.schedules_id, element.packages_id, element.booking_status));
             });
             return bookingData;
         }
@@ -23,7 +24,8 @@ export class BookingQuery implements BookingQueryInterface {
 
     async getBookingById(id: string): Promise<BookingDTO> {
         try{
-            const sql = `SELECT * FROM bookings WHERE id = :id`;
+            const sql = `SELECT * FROM bookings WHERE id = :id
+                        ORDER BY createdAt ASC`;
             const fetchData = sequelize.query(sql, {
                 replacements: {
                     id: id
@@ -33,7 +35,7 @@ export class BookingQuery implements BookingQueryInterface {
                 if(!element[0][0]){
                     return new BookingDTO('', '', '', '', '', '');
                 }
-                return new BookingDTO(element[0][0].id, element[0][0].user_id, element[0][0].schedules_id, element[0][0].packages_id, element[0][0].booking_statuses_id, element[0][0].transaction_id);
+                return new BookingDTO(element[0][0].id, element[0][0].user_id, element[0][0].schedules_id, element[0][0].packages_id, element[0][0].booking_status);
             });
         }
         catch(err){
