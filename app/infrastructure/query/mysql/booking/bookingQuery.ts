@@ -42,4 +42,28 @@ export class BookingQuery implements BookingQueryInterface {
             throw err;
         }
     }
+
+    async createBooking(data: any) {
+        try{
+            const sql = "INSERT INTO bookings (id, user_id, schedules_id, packages_id, booking_status, createdAt, updatedAt) VALUES (:id, :user_id, :schedules_id, :packages_id, :booking_status, :createdAt, :updatedAt)";
+            const response = sequelize.query(sql, {
+                replacements: {
+                    id: data.id,
+                    user_id: data.user_id,
+                    schedules_id: data.schedules_id,
+                    packages_id: data.packages_id,
+                    booking_status: data.booking_status,
+                    createdAt: data.created_at,
+                    updatedAt: data.updated_at
+                }
+            });
+            return response.then((res: any) => {
+                console.log(res);
+                return res[1];
+            }); 
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

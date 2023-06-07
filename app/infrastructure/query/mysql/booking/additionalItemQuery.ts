@@ -23,4 +23,27 @@ export class AdditionalItemQuery implements AdditionalItemInterface {
             throw err;
         }
     }
+
+    async createBookingAdditionalItems(data: any) {
+        try{
+            const sql = "INSERT INTO bookingadditionalitems (quantity, booking_id, additional_item_id, createdAt, updatedAt) VALUES (:quantity, :booking_id, :additional_item_id, :createdAt, :updatedAt)";
+            const response = sequelize.query(sql, {
+                replacements: {
+                    quantity: data.quantity,
+                    booking_id: data.booking_id,
+                    additional_item_id: data.additional_item_id,
+                    createdAt: data.created_at,
+                    updatedAt: data.updated_at
+                }
+            });
+            console.log(response);
+            return response.then((res: any) => {
+                console.log(res);
+                return res[1];
+            }); 
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

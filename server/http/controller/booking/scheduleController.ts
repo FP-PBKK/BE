@@ -42,8 +42,8 @@ export class ScheduleController {
 
     async getScheduleByTime(req: Request, res: Response) {
         try {
-            const {time} = req.body;
-            const data = await new ScheduleRepository().getScheduleByTime(time);
+            const {time} = req.params;
+            const data = await new ScheduleRepository().getScheduleByTime(time as string);
             res.status(200).send({
                 status: 200,
                 message: "Success",
@@ -60,8 +60,8 @@ export class ScheduleController {
 
     async getBookedScheduleByDate(req: Request, res: Response) {
         try {
-            const {date} = req.body;
-            const data = await new ScheduleService().getBookedScheduleByDate(date);
+            const {date} = req.params;
+            const data = await new ScheduleService().getBookedScheduleByDate(date as string);
             res.status(200).send({
                 status: 200,
                 message: "Success",
