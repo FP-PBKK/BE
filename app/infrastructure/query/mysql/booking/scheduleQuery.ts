@@ -73,13 +73,6 @@ export class ScheduleQuery implements ScheduleQueryInterface {
 
         async getBookedByDate(date: string): Promise<BookedScheduleDTO[]> {
             try{
-                // const sql = `SELECT schedules.id, schedules.time
-                //                 FROM schedules
-                //                 LEFT JOIN bookings ON schedules.id = bookings.schedules_id
-                //                 LEFT JOIN transactions ON bookings.transaction_id = transactions.id
-                //                 WHERE DATE(transactions.updatedAt) = :date
-                //                 AND transactions.paid = :paid
-                //                 `;
                 const sql = `SELECT schedules.id, schedules.time
                                 FROM schedules
                                 LEFT JOIN bookings ON schedules.id = bookings.schedules_id

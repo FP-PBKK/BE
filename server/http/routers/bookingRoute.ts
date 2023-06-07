@@ -23,8 +23,8 @@ export class BookingRoute {
         //schedule
         router.get("/schedules", this.scheduleController.getAllSchedule);
         router.get("/schedule/id/:id", this.scheduleController.getScheduleById);
-        router.get("/schedulebytime", this.scheduleController.getScheduleByTime);
-        router.get("/schedule/booked", this.scheduleController.getBookedScheduleByDate);
+        router.get("/schedule/time/:time", this.scheduleController.getScheduleByTime);
+        router.get("/schedule/booked/:date", this.scheduleController.getBookedScheduleByDate);
 
         //package
         router.get("/packages", this.packageController.getAllPackage);
@@ -36,6 +36,7 @@ export class BookingRoute {
         //booking
         router.get("/bookings", this.bookingController.getAllBooking);
         router.get("/booking/:id", this.bookingController.getBookingById);
+        router.post("/booking", this.bookingController.createBooking);
         
         return router;
     }
