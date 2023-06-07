@@ -18,6 +18,7 @@ module.exports = {
       schedules_id : "SCH0800",
       packages_id : "PKG0001",
       booking_status : "finish",
+      note: null,
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -26,6 +27,7 @@ module.exports = {
       schedules_id : "SCH0900",
       packages_id : "PKG0002",
       booking_status : "paid",
+      note: null,
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -34,6 +36,7 @@ module.exports = {
       schedules_id : "SCH1100",
       packages_id : "PKG0003",
       booking_status : "paid",
+      note: null,
       createdAt: new Date(),
       updatedAt: new Date()
     }

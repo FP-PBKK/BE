@@ -16,9 +16,7 @@ export class BookingCommand{
     async createBooking(data: any) {
         try{
             data.id = generateBookingId();
-            // const userModel = new UserModel(data.id, data.role_id, data.name, data.email, data.password, data.phone_number);
-            const bookingModel = new BookingModel(data.id, data.id_user, data.id_schedule, data.id_package, data.booking_status);
-            // return await this.userQuery.createUser(userModel.getDataUserArr());
+            const bookingModel = new BookingModel(data.id, data.id_user, data.id_schedule, data.id_package, data.booking_status, data.note);
             const createBookingRes = await this.bookingQuery.createBooking(bookingModel.getDataBooking());
             // iterate additional items
             let additionalItemRes = 0;
@@ -26,12 +24,11 @@ export class BookingCommand{
                 for(let i = 0; i < data.additional_items.length; i++){
                     const additionalItems = new BookingAdditionalItemModel(data.additional_items[i].quantity, data.id, data.additional_items[i].idItem );
                     const createBookingAdditionalItems = await this.additionalItemQuery.createBookingAdditionalItems(additionalItems.getDataBookingAdditionalItem());
-                    additionalItemRes = createBookingAdditionalItems[1];
+                    additionalItemRes = createBookingAdditionalItems;
                 }
             }
-            const bookingId = {
-                id: data.id
-            }
+            const bookingId = data.id;
+            console.log(additionalItemRes);
             return {bookingId, createBookingRes, additionalItemRes};
         }
         catch(error){

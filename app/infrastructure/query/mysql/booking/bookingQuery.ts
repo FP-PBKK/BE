@@ -45,7 +45,7 @@ export class BookingQuery implements BookingQueryInterface {
 
     async createBooking(data: any) {
         try{
-            const sql = "INSERT INTO bookings (id, user_id, schedules_id, packages_id, booking_status, createdAt, updatedAt) VALUES (:id, :user_id, :schedules_id, :packages_id, :booking_status, :createdAt, :updatedAt)";
+            const sql = "INSERT INTO bookings (id, user_id, schedules_id, packages_id, booking_status, note, createdAt, updatedAt) VALUES (:id, :user_id, :schedules_id, :packages_id, :booking_status, :note, :createdAt, :updatedAt)";
             const response = sequelize.query(sql, {
                 replacements: {
                     id: data.id,
@@ -53,6 +53,7 @@ export class BookingQuery implements BookingQueryInterface {
                     schedules_id: data.schedules_id,
                     packages_id: data.packages_id,
                     booking_status: data.booking_status,
+                    note: data.note,
                     createdAt: data.created_at,
                     updatedAt: data.updated_at
                 }

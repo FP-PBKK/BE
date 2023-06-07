@@ -42,4 +42,67 @@ export class TransactionQuery implements TransactionQueryInterface {
             throw err;
         }
     }
+
+    async createTransaction(data: any){
+        try{
+            const sql = `INSERT INTO transactions (id, total, paid, booking_id, qr_id, discount_id, createdAt, updatedAt) VALUES (:id, :total, :paid, :booking_id, :qr_id, :discount_id, :createdAt, :updatedAt)`;
+            const response = sequelize.query(sql, {
+                replacements: {
+                    id: data.id,
+                    total: data.total,
+                    paid: data.paid,
+                    booking_id: data.booking_id,
+                    qr_id: data.qr_id,
+                    discount_id: data.discount_id,
+                    createdAt: data.created_at,
+                    updatedAt: data.updated_at
+                }
+            });
+            return response.then((element: any) => {
+                return element[1];
+            });
+        }
+        catch(err){
+            throw err;
+        }
+    }
+
+    async getTransactionByQRId(qrId: string) {
+        try{
+            const sql = `SELECT * FROM transactions WHERE qr_id = :qr_id`;
+            const fetchData = sequelize.query(sql, {
+                replacements: {
+                    qr_id: qrId
+                }
+            });
+            return fetchData.then((element: any) => {
+                if(!element[0][0]){
+                    return false;
+                }
+                return true;
+            });
+        }
+        catch(err){
+            throw err;
+        }
+    }
+
+    async updatePaidStatus(qrId: string, paid: boolean) {
+        try{
+            const sql = `UPDATE transactions SET paid = :paid WHERE qr_id = :qr_id`;
+            const response = sequelize.query(sql, {
+                replacements: {
+                    qr_id: qrId,
+                    paid: paid
+                }
+            });
+            console.log("ini respon", response);
+            return response.then((element: any) => {
+                return element[1];
+            });
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

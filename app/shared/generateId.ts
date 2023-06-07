@@ -17,3 +17,12 @@ export const generateRoleId = () => {
 export const generateBookingId = () => {
     return 'BOK' + getDate() + '0' + Math.floor(100 + Math.random() * 900);
 }
+
+export const generateTransactionId = () => {
+    return 'TRS' + getDate() + '0' + Math.floor(1000 + Math.random() * 9000);
+}
+
+export const generateQR = () => {
+    const qrId = "QR" + Math.floor(Math.random() * 1000000000000000);
+    return qrId;
+}

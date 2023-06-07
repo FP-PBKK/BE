@@ -12,10 +12,6 @@ module.exports = {
       total: {
         type: Sequelize.INTEGER
       },
-      note: {
-        type: Sequelize.TEXT,
-        allowNull: true
-      },
       paid: {
         type: Sequelize.BOOLEAN
       },
@@ -23,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
-      qris_id: {
+      qr_id: {
         type: Sequelize.STRING
       },
       booking_id: {
