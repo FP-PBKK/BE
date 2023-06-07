@@ -15,30 +15,27 @@ module.exports = {
     await queryInterface.bulkInsert('transactions', [{
       id: "TRS202305110001",
       total: 49500,
-      note: null,
       paid: true,
       discount_id: "MEICERIYA",
-      qris_id: "ID012121290192121",
+      qr_id: "QR644946485813881",
       booking_id: "BOK202305110001",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
       id: "TRS202305110002",
       total: 85000,
-      note: null,
       paid: false,
       discount_id: null,
-      qris_id: "ID012121290192121",
+      qr_id: "QR644946485813990",
       booking_id: "BOK202305110002",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
       id: "TRS202304220001",
       total: 76500,
-      note: null,
       paid: true,
       discount_id: "LEBARANSERU",
-      qris_id: "ID012121290192121",
+      qr_id: "QRQR644946485813768",
       booking_id: "BOK202304220001",
       createdAt: new Date(),
       updatedAt: new Date()

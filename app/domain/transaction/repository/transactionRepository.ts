@@ -26,4 +26,14 @@ export class TransactionRepository {
             throw err;
         }
     }
+
+    async getTransactionByQRId(qrId: string): Promise<any> {
+        try{
+            const data = await this.transactionQuery.getTransactionByQRId(qrId);
+            return data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

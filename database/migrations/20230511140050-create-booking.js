@@ -21,6 +21,10 @@ module.exports = {
       booking_status: {
         type: Sequelize.ENUM('unpaid', 'paid', 'finish', 'canceled')
       },
+      note: {
+        type: Sequelize.TEXT,
+        allowNull: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

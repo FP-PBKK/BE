@@ -36,9 +36,7 @@ export class AdditionalItemQuery implements AdditionalItemInterface {
                     updatedAt: data.updated_at
                 }
             });
-            console.log(response);
             return response.then((res: any) => {
-                console.log(res);
                 return res[1];
             }); 
         }
