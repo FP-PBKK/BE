@@ -47,11 +47,6 @@ export class BookingService {
                     const additionalItemData = await this.bookingAdditionalItemRepository.getBookingAdditionalItemByBookingId(bookingData[i].id as string);
                     bookingData[i].additionalItem = additionalItemData;
                 }
-                //transaction
-                if(bookingData[i].idTransaction){
-                    const transactionData = await this.transactionRepository.getTransactionById(bookingData[i].idTransaction as string);
-                    bookingData[i].transaction = transactionData;
-                }
             }
             return bookingData;
         }
@@ -82,11 +77,6 @@ export class BookingService {
             if(bookingData.id){
                 const additionalItemData = await this.bookingAdditionalItemRepository.getBookingAdditionalItemByBookingId(bookingData.id as string);
                 bookingData.additionalItem = additionalItemData;
-            }
-            //transaction
-            if(bookingData.idTransaction){
-                const transactionData = await this.transactionRepository.getTransactionById(bookingData.idTransaction as string);
-                bookingData.transaction = transactionData;
             }
             return bookingData;
         }

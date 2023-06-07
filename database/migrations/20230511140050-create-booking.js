@@ -12,17 +12,14 @@ module.exports = {
       user_id: {
         type: Sequelize.STRING
       },
-      transaction_id: {
-        type: Sequelize.STRING
-      },
       schedules_id: {
         type: Sequelize.STRING
       },
       packages_id: {
         type: Sequelize.STRING
       },
-      booking_statuses_id: {
-        type: Sequelize.STRING
+      booking_status: {
+        type: Sequelize.ENUM('unpaid', 'paid', 'finish', 'canceled')
       },
       createdAt: {
         allowNull: false,

@@ -26,6 +26,9 @@ module.exports = {
       qris_id: {
         type: Sequelize.STRING
       },
+      booking_id: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -23,8 +23,8 @@ export class BookingRoute {
         //schedule
         router.get("/schedules", this.scheduleController.getAllSchedule);
         router.get("/schedule/id/:id", this.scheduleController.getScheduleById);
-        router.post("/schedulebytime", this.scheduleController.getScheduleByTime);
-        router.post("/schedule/booked", this.scheduleController.getBookedScheduleByDate);
+        router.get("/schedulebytime", this.scheduleController.getScheduleByTime);
+        router.get("/schedule/booked", this.scheduleController.getBookedScheduleByDate);
 
         //package
         router.get("/packages", this.packageController.getAllPackage);

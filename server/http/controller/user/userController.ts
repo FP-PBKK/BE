@@ -25,6 +25,13 @@ export class UserController {
         try {
             const {id} = req.params;
             const result = await new UserRepository().getUserById(id as string);
+            if(!result || result.name.length == 0){
+                return res.status(404).send({
+                    status: 404,
+                    message: "user not found",
+                    data: {}
+                });
+            }
             res.status(200).send({
                 status: 200,
                 message: "Success",
