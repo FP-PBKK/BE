@@ -3,7 +3,7 @@ export class TransactionDTO{
         private id: string,
         private total: number,
         private paid: boolean,
-        private qrisId: string,        
+        private qrId: string,        
         private bookingId: string,
         private createdAt: string,
         private updatedAt: string,

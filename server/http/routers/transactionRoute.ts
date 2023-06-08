@@ -23,7 +23,7 @@ export class TransactionRoute{
         router.get('/getqr/?:qrid&&:amount', xenditController.getQR);
         router.get('/getqr/:qrid', xenditController.getQRCode);
         router.post("/xendit/callback", xenditController.callBack);
-        router.get("/xendit/simulate/?:qrid&&:amount", xenditController.simulateTransaction);
+        router.get("/xendit/simulate/:qrid", xenditController.simulateTransaction);
         return router;
     }
 }
