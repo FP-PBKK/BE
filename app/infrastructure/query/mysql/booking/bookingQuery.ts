@@ -67,4 +67,29 @@ export class BookingQuery implements BookingQueryInterface {
             throw err;
         }
     }
+
+    async updateBookingStatus(qrId: string, status: string) {
+        try{
+            const sql = `UPDATE bookings
+                        LEFT JOIN
+                            transactions ON bookings.id = transactions.booking_id
+                        SET
+                            bookings.booking_status = :booking_status
+                        WHERE
+                            transactions.qr_id = :qr_id`;
+            const response = sequelize.query(sql, {
+                replacements: {
+                    qr_id: qrId,
+                    booking_status: status,
+                    updatedAt: new Date()
+                }
+            });
+            return response.then((res: any) => {
+                return res[1];
+            }); 
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }
