@@ -96,7 +96,6 @@ export class TransactionQuery implements TransactionQueryInterface {
                     paid: paid
                 }
             });
-            console.log("ini respon", response);
             return response.then((element: any) => {
                 return element[1];
             });

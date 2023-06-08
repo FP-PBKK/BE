@@ -35,4 +35,14 @@ export class BookingCommand{
             throw error;
         }        
     }
+
+    async updateBookingStatus(qrId: string, status: string) {
+        try{
+            const updateBookingStatusRes = await this.bookingQuery.updateBookingStatus(qrId, status);
+            return updateBookingStatusRes;
+        }
+        catch(error){
+            throw error;
+        }
+    }
 }
