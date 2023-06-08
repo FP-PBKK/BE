@@ -15,7 +15,8 @@ export class TransactionRoute{
     public get routes(){
         const transController = this.transactionController;
         router.get("/", transController.getAllTransactions);
-        router.get("/:id", transController.getTransactionById);
+        router.get("/id/:id", transController.getTransactionById);
+        router.get("/user/:userID", transController.getTransactionByUserID)
         router.post("/", transController.createTransaction);
 
         //xendit

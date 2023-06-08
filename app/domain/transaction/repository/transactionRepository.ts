@@ -36,4 +36,14 @@ export class TransactionRepository {
             throw err;
         }
     }
+
+    async getTransactionByUserId(userID: string): Promise<any> {
+        try{
+            const data = await this.transactionQuery.getTransactionByUserID(userID);
+            return data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

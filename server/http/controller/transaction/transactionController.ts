@@ -41,6 +41,25 @@ export class TransactionController {
         }
     }
 
+    async getTransactionByUserID(req: Request, res: Response){
+        try{
+            const {userID} = req.params;
+            const data = await new TransactionRepository().getTransactionByUserId(userID);
+            res.status(200).json({
+                status: 200,
+                message: "Success",
+                data: data
+            });
+        }
+        catch(err){
+            res.status(500).json({
+                status: 500,
+                message: "Internal Server Error",
+                data: err
+            });
+        }
+    }
+
     async createTransaction(req: Request, res: Response){
         try{
             const data = req.body;

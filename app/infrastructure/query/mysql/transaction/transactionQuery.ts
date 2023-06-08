@@ -13,7 +13,7 @@ export class TransactionQuery implements TransactionQueryInterface {
                 return data;
             }
             fetchData[0].forEach((element: any) => {
-                data.push(new TransactionDTO(element.id, element.total, element.paid, element.qr_id, element.booking_id, element.created_at, element.updated_at, element.discount_id));
+                data.push(new TransactionDTO(element.id, element.total, element.paid, element.qr_id, element.booking_id, element.createdAt, element.updatedAt, element.discount_id));
             });
             return data;
         }
@@ -35,8 +35,34 @@ export class TransactionQuery implements TransactionQueryInterface {
                 if(!element[0][0]){
                     return new TransactionDTO('', 0, false, '', '', '', '');
                 }
-                return new TransactionDTO(element[0][0].id, element[0][0].total, element[0][0].paid, element[0][0].qr_id, element[0][0].booking_id, element[0][0].created_at, element[0][0].updated_at, element[0][0].discount_id);
+                return new TransactionDTO(element[0][0].id, element[0][0].total, element[0][0].paid, element[0][0].qr_id, element[0][0].booking_id, element[0][0].createdAt, element[0][0].updatedAt, element[0][0].discount_id);
             });
+        }
+        catch(err){
+            throw err;
+        }
+    }
+
+    async getTransactionByUserID(userID: string): Promise<TransactionDTO[]> {
+        try{
+            const sql = `SELECT * 
+                        FROM transactions
+                        LEFT JOIN bookings ON transactions.booking_id = bookings.id
+                        WHERE bookings.user_id = :user_id
+                        ORDER BY transactions.createdAt ASC`;
+            const fetchData = await sequelize.query(sql, {
+                replacements: {
+                    user_id: userID
+                }
+            });
+            const data: TransactionDTO[] = [];
+            if(!fetchData[0]){
+                return data;
+            }
+            fetchData[0].forEach((element: any) => {
+                data.push(new TransactionDTO(element.id, element.total, element.paid, element.qr_id, element.booking_id, element.createdAt, element.updatedAt, element.discount_id));
+            });
+            return data;
         }
         catch(err){
             throw err;
