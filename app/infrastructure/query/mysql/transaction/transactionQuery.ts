@@ -13,7 +13,7 @@ export class TransactionQuery implements TransactionQueryInterface {
                 return data;
             }
             fetchData[0].forEach((element: any) => {
-                data.push(new TransactionDTO(element.id, element.total, element.paid, element.booking_id, element.qris_id, element.created_at, element.updated_at, element.discount_id));
+                data.push(new TransactionDTO(element.id, element.total, element.paid, element.qr_id, element.booking_id, element.created_at, element.updated_at, element.discount_id));
             });
             return data;
         }
@@ -35,7 +35,7 @@ export class TransactionQuery implements TransactionQueryInterface {
                 if(!element[0][0]){
                     return new TransactionDTO('', 0, false, '', '', '', '');
                 }
-                return new TransactionDTO(element[0][0].id, element[0][0].total, element[0][0].paid, element[0][0].booking_id, element[0][0].qris_id, element[0][0].created_at, element[0][0].updated_at, element[0][0].discount_id);
+                return new TransactionDTO(element[0][0].id, element[0][0].total, element[0][0].paid, element[0][0].qr_id, element[0][0].booking_id, element[0][0].created_at, element[0][0].updated_at, element[0][0].discount_id);
             });
         }
         catch(err){
