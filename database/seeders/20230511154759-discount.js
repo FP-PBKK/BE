@@ -30,6 +30,15 @@ module.exports = {
       description: "Promo selama bulan mei diskon hingga 10%",
       createdAt: new Date(),
       updatedAt: new Date()
+    },{
+      id: "JUNICERIYA",
+      name: "Promo bulan Juni",
+      percentage: 0.15,
+      start_date: "2023-06-01",
+      end_date: "2023-06-30",
+      description: "Promo selama bulan Juni diskon hingga 15%",
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
   ], {});
   },

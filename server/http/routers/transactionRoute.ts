@@ -1,15 +1,18 @@
 import express, {Request, Response} from "express";
 const router = express.Router();
 import { TransactionController } from "../controller/transaction/transactionController";
+import { DiscountController } from "../controller/transaction/discountController";
 import { XenditController } from "../controller/transaction/xenditController";
 
 export class TransactionRoute{
     private transactionController: TransactionController;
     private xenditController: XenditController;
+    private discountController: DiscountController;
 
     constructor(){
         this.transactionController = new TransactionController();
         this.xenditController = new XenditController();
+        this.discountController = new DiscountController();
     }
 
     public get routes(){
@@ -18,6 +21,12 @@ export class TransactionRoute{
         router.get("/id/:id", transController.getTransactionById);
         router.get("/user/:userID", transController.getTransactionByUserID)
         router.post("/", transController.createTransaction);
+
+        //discount
+        const discountController = this.discountController;
+        router.get("/discount", discountController.getAllDiscounts);
+        router.get("/discount/id/:id", discountController.getDiscountById);
+        router.get("/discount/validity/:id", discountController.checkDiscountValidity);
 
         //xendit
         const xenditController = this.xenditController;
