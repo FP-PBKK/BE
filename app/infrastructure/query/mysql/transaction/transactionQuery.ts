@@ -45,7 +45,7 @@ export class TransactionQuery implements TransactionQueryInterface {
 
     async getTransactionByUserID(userID: string): Promise<TransactionDTO[]> {
         try{
-            const sql = `SELECT * 
+            const sql = `SELECT transactions.*
                         FROM transactions
                         LEFT JOIN bookings ON transactions.booking_id = bookings.id
                         WHERE bookings.user_id = :user_id
