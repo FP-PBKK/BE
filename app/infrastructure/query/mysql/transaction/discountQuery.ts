@@ -48,4 +48,24 @@ export class DiscountQuery implements DiscountQueryInterface {
             return true;
         });
     }
+
+    async createDiscount(data: any): Promise<any> {
+        const sql = `INSERT INTO discounts (id, name, percentage, start_date, end_date, description, createdAt, updatedAt) 
+                    VALUES (:id, :name, :percentage, :start_date, :end_date, :description, :createdAt, :updatedAt)`;
+        const fetchData = sequelize.query(sql, {
+            replacements: {
+                id: data.id,
+                name: data.name,
+                percentage: data.percentage,
+                start_date: data.start_date,
+                end_date: data.end_date,
+                description: data.description,
+                createdAt: data.created_at,
+                updatedAt: data.updated_at
+            }
+        });
+        return fetchData.then((element: any) => {
+            return element[1];
+        });
+    }
 }

@@ -5,6 +5,7 @@ export class BookingModel{
         public schedules_id: string,
         public packages_id: string,
         public booking_status: string,
+        public date: string,
         public note: string,
         public created_at?: string,
         public updated_at?: string
@@ -17,6 +18,7 @@ export class BookingModel{
             schedules_id: this.schedules_id,
             packages_id: this.packages_id,
             booking_status: this.booking_status,
+            date: new Date(this.date),
             note: this.note,
             created_at: new Date(),
             updated_at: new Date()

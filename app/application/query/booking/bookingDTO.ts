@@ -10,6 +10,7 @@ export class BookingDTO{
         public idSchedule: string,
         public idPackage: string,
         public bookingStatus: string,
+        public date: string,
         public idBookingAddiotionalItem?: string,    
         public user?: UserDTO,
         public schedule?: ScheduleDTO,

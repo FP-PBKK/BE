@@ -20,6 +20,7 @@ export class TransactionRoute{
         router.get("/", transController.getAllTransactions);
         router.get("/id/:id", transController.getTransactionById);
         router.get("/user/:userID", transController.getTransactionByUserID)
+        router.get("/check/:date&&:time", transController.checkValidTransactionByDateTime)
         router.post("/", transController.createTransaction);
 
         //discount
@@ -27,6 +28,7 @@ export class TransactionRoute{
         router.get("/discount", discountController.getAllDiscounts);
         router.get("/discount/id/:id", discountController.getDiscountById);
         router.get("/discount/validity/:id", discountController.checkDiscountValidity);
+        router.post("/discount", discountController.createDiscount);
 
         //xendit
         const xenditController = this.xenditController;

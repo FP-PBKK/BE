@@ -26,3 +26,7 @@ export const generateQR = () => {
     const qrId = "QR" + Math.floor(Math.random() * 1000000000000000);
     return qrId;
 }
+
+export const generateFeedbackId = () => {
+    return 'FDB' + getDate() + '0' + Math.floor(100 + Math.random() * 900);
+}

@@ -46,4 +46,14 @@ export class TransactionRepository {
             throw err;
         }
     }
+
+    async checkValidTransactionByDateTime(date: string, time: string): Promise<any> {
+        try{
+            const data = await this.transactionQuery.checkValidTransactionByDateTime(date, time);
+            return data;
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }
