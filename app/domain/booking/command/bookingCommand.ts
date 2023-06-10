@@ -16,7 +16,7 @@ export class BookingCommand{
     async createBooking(data: any) {
         try{
             data.id = generateBookingId();
-            const bookingModel = new BookingModel(data.id, data.id_user, data.id_schedule, data.id_package, data.booking_status, data.note);
+            const bookingModel = new BookingModel(data.id, data.id_user, data.id_schedule, data.id_package, data.booking_status, data.date, data.note);
             const createBookingRes = await this.bookingQuery.createBooking(bookingModel.getDataBooking());
             // iterate additional items
             let additionalItemRes = 0;
@@ -28,7 +28,6 @@ export class BookingCommand{
                 }
             }
             const bookingId = data.id;
-            console.log(additionalItemRes);
             return {bookingId, createBookingRes, additionalItemRes};
         }
         catch(error){
@@ -36,9 +35,19 @@ export class BookingCommand{
         }        
     }
 
-    async updateBookingStatus(qrId: string, status: string) {
+    async updateBookingStatus(id: string, status: string) {
         try{
-            const updateBookingStatusRes = await this.bookingQuery.updateBookingStatus(qrId, status);
+            const updateBookingStatusRes = await this.bookingQuery.updateBookingStatus(id, status);
+            return updateBookingStatusRes;
+        }
+        catch(error){
+            throw error;
+        }
+    }
+
+    async updateBookingStatusByQR(qrId: string, status: string) {
+        try{
+            const updateBookingStatusRes = await this.bookingQuery.updateBookingStatusByQR(qrId, status);
             return updateBookingStatusRes;
         }
         catch(error){

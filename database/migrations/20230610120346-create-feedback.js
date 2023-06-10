@@ -1,8 +1,9 @@
 'use strict';
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Bookings', {
+  async up (queryInterface, Sequelize) {
+    await queryInterface.createTable('Feedbacks', {
       id: {
         allowNull: false,
         autoIncrement: false,
@@ -12,21 +13,15 @@ module.exports = {
       user_id: {
         type: Sequelize.STRING
       },
-      schedules_id: {
+      booking_id: {
         type: Sequelize.STRING
       },
-      packages_id: {
-        type: Sequelize.STRING
-      },
-      booking_status: {
-        type: Sequelize.ENUM('unpaid', 'paid', 'finish', 'canceled')
-      },
-      date:{
-        type: Sequelize.DATEONLY,
-      },
-      note: {
+      comment: {
         type: Sequelize.TEXT,
         allowNull: true
+      },
+      rate: {
+        type: Sequelize.FLOAT,
       },
       createdAt: {
         allowNull: false,
@@ -38,7 +33,13 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Bookings');
+
+  async down (queryInterface, Sequelize) {
+    /**
+     * Add reverting commands here.
+     *
+     * Example:
+     * await queryInterface.dropTable('users');
+     */
   }
 };

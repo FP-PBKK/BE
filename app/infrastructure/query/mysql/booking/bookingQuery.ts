@@ -13,7 +13,7 @@ export class BookingQuery implements BookingQueryInterface {
                 return bookingData;
             }
             bookingFetchData[0].forEach((element: any) => {
-                bookingData.push(new BookingDTO(element.id, element.user_id, element.schedules_id, element.packages_id, element.booking_status));
+                bookingData.push(new BookingDTO(element.id, element.user_id, element.schedules_id, element.packages_id, element.booking_status, element.date, element.note, element.createdAt, element.updatedAt));
             });
             return bookingData;
         }
@@ -35,7 +35,7 @@ export class BookingQuery implements BookingQueryInterface {
                 if(!element[0][0]){
                     return new BookingDTO('', '', '', '', '', '');
                 }
-                return new BookingDTO(element[0][0].id, element[0][0].user_id, element[0][0].schedules_id, element[0][0].packages_id, element[0][0].booking_status);
+                return new BookingDTO(element[0][0].id, element[0][0].user_id, element[0][0].schedules_id, element[0][0].packages_id, element[0][0].booking_status, element[0][0].date, element[0][0].note, element[0][0].createdAt, element[0][0].updatedAt);
             });
         }
         catch(err){
@@ -45,7 +45,7 @@ export class BookingQuery implements BookingQueryInterface {
 
     async createBooking(data: any) {
         try{
-            const sql = "INSERT INTO bookings (id, user_id, schedules_id, packages_id, booking_status, note, createdAt, updatedAt) VALUES (:id, :user_id, :schedules_id, :packages_id, :booking_status, :note, :createdAt, :updatedAt)";
+            const sql = "INSERT INTO bookings (id, user_id, schedules_id, packages_id, booking_status, date, note, createdAt, updatedAt) VALUES (:id, :user_id, :schedules_id, :packages_id, :booking_status, :date, :note, :createdAt, :updatedAt)";
             const response = sequelize.query(sql, {
                 replacements: {
                     id: data.id,
@@ -53,13 +53,13 @@ export class BookingQuery implements BookingQueryInterface {
                     schedules_id: data.schedules_id,
                     packages_id: data.packages_id,
                     booking_status: data.booking_status,
+                    date: data.date,
                     note: data.note,
                     createdAt: data.created_at,
                     updatedAt: data.updated_at
                 }
             });
             return response.then((res: any) => {
-                console.log(res);
                 return res[1];
             }); 
         }
@@ -68,7 +68,26 @@ export class BookingQuery implements BookingQueryInterface {
         }
     }
 
-    async updateBookingStatus(qrId: string, status: string) {
+    async updateBookingStatus(id: string, status: string) {
+        try{
+            const sql = `UPDATE bookings SET booking_status = :booking_status WHERE id = :id`;
+            const response = sequelize.query(sql, {
+                replacements: {
+                    id: id,
+                    booking_status: status,
+                    updatedAt: new Date()
+                }
+            });
+            return response.then((res: any) => {
+                return res[1].info;
+            }); 
+        }
+        catch(err){
+            throw err;
+        }
+    }
+
+    async updateBookingStatusByQR(qrId: string, status: string) {
         try{
             const sql = `UPDATE bookings
                         LEFT JOIN

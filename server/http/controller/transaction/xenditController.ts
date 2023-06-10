@@ -55,7 +55,7 @@ export class XenditController {
                 //update transaction status
                 const updateTransaction = await new TransactionCommand().updateStatusTransaction(qrId, true);
                 //update booking status
-                const updateBooking = await new BookingCommand().updateBookingStatus(qrId, "paid");
+                const updateBooking = await new BookingCommand().updateBookingStatusByQR(qrId, "paid");
                 if(updateTransaction && updateBooking){
                     return res.sendStatus(200)
                 }

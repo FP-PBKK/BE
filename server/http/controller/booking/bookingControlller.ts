@@ -58,4 +58,24 @@ export class BookingController {
             });
         }
     }
+
+    async updateBookingStatus(req: Request, res: Response){
+        try{
+            const {id} = req.params;
+            const {status} = req.body;
+            const bookingData = await new BookingCommand().updateBookingStatus(id, status);
+            return res.status(200).json({
+                status: 200,
+                message: "Success",
+                data: bookingData
+            });
+        }
+        catch(err){
+            return res.status(500).json({
+                status: 500,
+                message: "Internal Server Error",
+                data: err
+            });
+        }
+    }
 }

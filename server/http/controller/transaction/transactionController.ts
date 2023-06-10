@@ -60,6 +60,25 @@ export class TransactionController {
         }
     }
 
+    async checkValidTransactionByDateTime(req: Request, res: Response){
+        try{
+            const {date, time} = req.params;
+            const data = await new TransactionRepository().checkValidTransactionByDateTime(date, time);
+            res.status(200).json({
+                status: 200,
+                message: "Success",
+                data: data
+            });
+        }
+        catch(err){
+            res.status(500).json({
+                status: 500,
+                message: "Internal Server Error",
+                data: err
+            });
+        }
+    }
+
     async createTransaction(req: Request, res: Response){
         try{
             const data = req.body;

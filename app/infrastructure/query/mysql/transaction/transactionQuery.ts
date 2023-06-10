@@ -1,6 +1,7 @@
 import { TransactionDTO } from "../../../../application/query/transaction/transactionDTO";
 import { TransactionQueryInterface } from "../../../../application/query/transaction/transactionQueryInterface";
 import { sequelize } from "../../../../../config/database";
+import { getDateRange } from "../../../../shared/dateUtils";
 
 export class TransactionQuery implements TransactionQueryInterface {
     async getAllTransactions(): Promise<TransactionDTO[]> {
@@ -67,6 +68,31 @@ export class TransactionQuery implements TransactionQueryInterface {
         catch(err){
             throw err;
         }
+    }
+
+    async checkValidTransactionByDateTime(date: string, time: string): Promise<boolean> {
+        const {start_date, end_date} = getDateRange(date);
+        const sql = `SELECT transactions.*
+                    FROM transactions
+                    LEFT JOIN bookings ON transactions.booking_id = bookings.id
+                    LEFT JOIN schedules ON bookings.schedules_id = schedules.id
+                    WHERE schedules.time = :time
+                    AND (bookings.date BETWEEN :start_date AND :end_date)
+                    AND
+                    (transactions.paid = true OR bookings.booking_status = 'finish')`
+        const fetchData = sequelize.query(sql, {
+            replacements: {
+                time: time,
+                start_date: start_date,
+                end_date: end_date
+            }
+        });
+        return fetchData.then((element: any) => {
+            if(!element[0][0]){
+                return false;
+            }
+            return true;
+        });
     }
 
     async createTransaction(data: any){
