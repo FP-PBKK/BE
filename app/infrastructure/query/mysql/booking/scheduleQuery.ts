@@ -101,4 +101,40 @@ export class ScheduleQuery implements ScheduleQueryInterface {
                 throw err;
             }
         }
+
+        async createSchedule(data: any): Promise<any> {
+            try{
+                const sql = `INSERT INTO schedules (id, time, createdAt, updatedAt)
+                            VALUES (:id, :time, :createdAt, :updatedAt)`;
+                const response = sequelize.query(sql, {
+                    replacements: {
+                        id: data.id,
+                        time: data.time,
+                        createdAt: data.created_at,
+                        updatedAt: data.updated_at
+                    }
+                });
+                return response.then((res: any) => {
+                    return res[1];
+                });
+            }
+            catch(err){
+                throw err;
+            }
+        }
+
+        async deleteSchedule(id: string): Promise<any> {
+            try{
+                const sql = `DELETE FROM schedules WHERE id = ?`;
+                const fetchData = sequelize.query(sql, {
+                    replacements: [id]
+                });
+                return fetchData.then((res: any) => {
+                    return res[1];
+                });
+            }
+            catch(err){
+                throw err;
+            }
+        }
 }

@@ -43,6 +43,31 @@ export class BookingQuery implements BookingQueryInterface {
         }
     }
 
+    async getBookingByUserId(userId: string): Promise<BookingDTO[]> {
+        try{
+            const sql = `SELECT * FROM bookings WHERE user_id = :user_id
+                        ORDER BY createdAt ASC`;
+            const fetchData = sequelize.query(sql, {
+                replacements: {
+                    user_id: userId
+                }
+            });
+            const bookingData: BookingDTO[] = [];
+            return fetchData.then((element: any) => {
+                if(!element[0][0]){
+                    return bookingData;
+                }
+                element[0].forEach((element: any) => {
+                    bookingData.push(new BookingDTO(element.id, element.user_id, element.schedules_id, element.packages_id, element.booking_status, element.date, element.note, element.createdAt, element.updatedAt));
+                });
+                return bookingData;
+            });
+        }
+        catch(err){
+            throw err;
+        }
+    }
+
     async createBooking(data: any) {
         try{
             const sql = "INSERT INTO bookings (id, user_id, schedules_id, packages_id, booking_status, date, note, createdAt, updatedAt) VALUES (:id, :user_id, :schedules_id, :packages_id, :booking_status, :date, :note, :createdAt, :updatedAt)";

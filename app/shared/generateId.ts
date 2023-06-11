@@ -30,3 +30,10 @@ export const generateQR = () => {
 export const generateFeedbackId = () => {
     return 'FDB' + getDate() + '0' + Math.floor(100 + Math.random() * 900);
 }
+
+export const generateScheduleId = (time: string) => {
+    const hours = time.split(':')[0];
+    const minutes = time.split(':')[1];
+    const scheduleId = 'SCH' + hours + minutes;
+    return scheduleId;
+}

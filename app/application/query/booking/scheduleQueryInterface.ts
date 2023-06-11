@@ -6,4 +6,5 @@ export interface ScheduleQueryInterface{
     getScheduleById(id: string): Promise<ScheduleDTO>;
     getScheduleByTime(time: string): Promise<ScheduleDTO[]>;
     getBookedByDate(date: string): Promise<BookedScheduleDTO[]>;
+    createSchedule(data: any): Promise<any>;
 }
