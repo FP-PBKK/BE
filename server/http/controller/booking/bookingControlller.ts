@@ -1,5 +1,6 @@
 import { BookingService } from "../../../../app/domain/booking/service/bookingService";
 import { BookingCommand } from "../../../../app/domain/booking/command/bookingCommand";
+import { BookingRepository } from "../../../../app/domain/booking/repository/bookingRepository";
 import { Request, Response } from "express";
 
 export class BookingController {
@@ -26,6 +27,39 @@ export class BookingController {
         try{
             const {id} = req.params;
             const bookingData = await new BookingService().getBookingByIdAndReferences(id);
+            if(bookingData.id.length == 0){
+                return res.status(404).json({
+                    status: 404,
+                    message: "Not Found",
+                    data: {}
+                });
+            }
+            return res.status(200).json({
+                status: 200,
+                message: "Success",
+                data: bookingData
+            });
+        }
+        catch(err){
+            return res.status(500).json({
+                status: 500,
+                message: "Internal Server Error",
+                data: err
+            });
+        }
+    }
+
+    async getBookingByUserId(req: Request, res: Response){
+        try{
+            const {userId} = req.params;
+            const bookingData = await new BookingRepository().getBookingByUserId(userId);
+            if(bookingData.length == 0){
+                return res.status(404).json({
+                    status: 404,
+                    message: "Not Found",
+                    data: {}
+                });
+            }
             return res.status(200).json({
                 status: 200,
                 message: "Success",

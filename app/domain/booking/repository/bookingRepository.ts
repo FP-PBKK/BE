@@ -24,4 +24,13 @@ export class BookingRepository {
             throw err;
         }
     }
+
+    async getBookingByUserId(userId: string){
+        try{
+            return await this.bookingQuery.getBookingByUserId(userId);
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

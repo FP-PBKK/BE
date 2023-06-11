@@ -28,6 +28,8 @@ export class BookingRoute {
         router.get("/schedule/id/:id", this.scheduleController.getScheduleById);
         router.get("/schedule/time/:time", this.scheduleController.getScheduleByTime);
         router.get("/schedule/booked/:date", this.scheduleController.getBookedScheduleByDate);
+        router.post("/schedule", this.scheduleController.createSchedule);
+        router.delete("/schedule/:id", this.scheduleController.deleteSchedule);
 
         //package
         router.get("/packages", this.packageController.getAllPackage);
@@ -38,7 +40,8 @@ export class BookingRoute {
 
         //booking
         router.get("/bookings", this.bookingController.getAllBooking);
-        router.get("/booking/:id", this.bookingController.getBookingById);
+        router.get("/booking/id/:id", this.bookingController.getBookingById);
+        router.get("/booking/user/:userId", this.bookingController.getBookingByUserId);
         router.post("/booking", this.bookingController.createBooking);
         router.put("/booking_status/:id", this.bookingController.updateBookingStatus);
 
