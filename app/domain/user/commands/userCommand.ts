@@ -21,4 +21,41 @@ export class UserCommand{
             throw error;
         }        
     }
+
+    async updateUser(id: string, data: any) {
+        try{
+            //find user
+            const user = await this.userQuery.getUserById(id);
+            if(user.id.length == 0){
+                return {
+                    message: 'User not found'
+                }
+            }
+            data.id = id;
+            if(data.password){
+                data.password = await PasswordUtils.hashPassword(data.password);
+            }
+            const userModel = new UserModel(data.id, data.role_id, data.name, data.email, data.password, data.phone_number);
+            return await this.userQuery.updateUser(id, userModel.getDataUser());
+        }
+        catch(error){
+            throw error;
+        }
+    }
+
+    async deleteUser(id: string) {
+        try{
+            //find user
+            const user = await this.userQuery.getUserById(id);
+            if(user.id.length == 0){
+                return {
+                    message: 'User not found'
+                }
+            }
+            return await this.userQuery.deleteUser(id);
+        }
+        catch(error){
+            throw error;
+        }
+    }
 }

@@ -20,6 +20,8 @@ export class UserRoute {
         router.get("/", this.userController.getAllUser);
         router.get("/id/:id", this.userController.getUserById);
         router.post("/", this.userController.createUser);
+        router.put("/update/:id", this.userController.updateUser);
+        router.delete("/delete/:id", this.userController.deleteUser);
 
         //role
         router.get("/roles", this.roleController.getAllRole);
