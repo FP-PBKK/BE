@@ -1,6 +1,6 @@
 export class TransactionDTO{
     constructor(
-        private id: string,
+        public id: string,
         private total: number,
         private paid: boolean,
         private qrId: string,        

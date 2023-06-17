@@ -87,4 +87,51 @@ export class UserQuery implements UserQueryInterface {
             throw err;
         }
     }
+
+    async updateUser(id: string, data: any){
+        try{
+            const sql = `UPDATE users 
+                        SET 
+                            role_id = IF( :role_id IS NULL, role_id, :role_id), 
+                            name = IF(:name IS NULL, name, :name), 
+                            email = IF(:email IS NULL, email, :email), 
+                            phone_number = IF(:phone_number IS NULL, phone_number, :phone_number),
+                            password = IF(:password IS NULL, password, :password), 
+                            updatedAt = IF(:updatedAt IS NULL, NOW(), :updatedAt)
+                        WHERE id = :id`;
+            const response = sequelize.query(sql, {
+                replacements: {
+                    id: id,
+                    role_id: data.role_id || null,
+                    name: data.name || null,
+                    email: data.email || null,
+                    phone_number: data.phone_number || null,
+                    password: data.password || null,
+                    updatedAt: data.updatedAt || null,
+                }
+            });
+            console.log(response)
+            return response.then((res: any) => {
+                return res[1];
+            }); 
+        }
+        catch(err){
+            throw err;
+        }
+    }
+
+    async deleteUser(id:string){
+        try{
+            const sql = `DELETE FROM users WHERE id = ?`;
+            const response = sequelize.query(sql, {
+                replacements: [id]
+            });
+            return response.then((res: any) => {
+                return res[1];
+            }); 
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

@@ -35,4 +35,23 @@ export class TransactionCommand{
             throw error;
         }
     }
+
+    async updateTransaction(id: string, data: any) {
+        try{
+            //find transaction by id
+            const transaction = await this.transactionQuery.getTransactionById(id);
+            if(transaction.id.length == 0){
+                return {
+                    message: "Transaction not found"
+                }
+            }
+            //update transaction
+            const transactionModel = new TransactionModel(id, data.total, data.paid, data.discount_id, data.qr_id, data.id_booking);
+            const updateTransactionRes = await this.transactionQuery.updateTransaction(id, transactionModel.getDataTransaction());
+            return updateTransactionRes;
+        }
+        catch(error){
+            throw error;
+        }
+    }
 }

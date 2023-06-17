@@ -22,4 +22,17 @@ export class UserModel{
             new Date()
         ]
     }
+
+    getDataUser(){
+        return {
+            id: this.id,
+            role_id: this.role_id,
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            phone_number: this.phone_number,
+            created_at: new Date(),
+            updated_at: new Date()
+        }
+    }
 }

@@ -22,6 +22,7 @@ export class TransactionRoute{
         router.get("/user/:userID", transController.getTransactionByUserID)
         router.get("/check/:date&&:time", transController.checkValidTransactionByDateTime)
         router.post("/", transController.createTransaction);
+        router.put("/:id", transController.updateTransaction);
 
         //discount
         const discountController = this.discountController;

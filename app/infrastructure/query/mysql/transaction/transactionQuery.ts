@@ -156,4 +156,35 @@ export class TransactionQuery implements TransactionQueryInterface {
             throw err;
         }
     }
+
+    async updateTransaction(id: string, data: any){
+        try{
+            const sql = `UPDATE transactions 
+                        SET 
+                            total = IF( :total IS NULL, total, :total), 
+                            paid = IF(:paid IS NULL, paid, :paid), 
+                            discount_id = IF(:discount_id IS NULL, discount_id, :discount_id), 
+                            qr_id = IF(:qr_id IS NULL, qr_id, :qr_id),
+                            booking_id = IF(:booking_id IS NULL, booking_id, :booking_id), 
+                            updatedAt = IF(:updatedAt IS NULL, NOW(), :updatedAt)
+                        WHERE id = :id`;
+            const response = sequelize.query(sql, {
+                replacements: {
+                    id: id,
+                    total: data.total || null,
+                    paid: data.paid || null,
+                    discount_id: data.discount_id || null,
+                    qr_id: data.qr_id || null,
+                    booking_id: data.booking_id || null,
+                    updatedAt: data.updatedAt || null,
+                }
+            });
+            return response.then((res: any) => {
+                return res[1];
+            }); 
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

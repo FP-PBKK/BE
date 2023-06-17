@@ -97,4 +97,24 @@ export class TransactionController {
             });
         }
     }
+
+    async updateTransaction(req: Request, res: Response){
+        try{
+            const {id} = req.params;
+            const data = req.body;
+            const updateTransactionRes = await new TransactionCommand().updateTransaction(id, data);
+            res.status(200).json({
+                status: 200,
+                message: "Success",
+                data: updateTransactionRes
+            });
+        }
+        catch(err){
+            res.status(500).json({
+                status: 500,
+                message: "Internal Server Error",
+                data: err
+            });
+        }
+    }
 }
