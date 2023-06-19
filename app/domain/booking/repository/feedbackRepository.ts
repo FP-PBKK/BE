@@ -24,4 +24,13 @@ export class FeedbackRepository {
             throw err;
         }
     }
+
+    async getFeedbackByUserId(userId: string){
+        try{
+            return await this.feedbackQuery.getFeedbackByUserId(userId);
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

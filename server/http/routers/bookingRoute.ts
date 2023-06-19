@@ -47,8 +47,11 @@ export class BookingRoute {
 
         //feedback
         router.get("/feedbacks", this.feedbackController.getFeedbacks);
-        router.get("/feedback/:id", this.feedbackController.getFeedbackById);
+        router.get("/feedback/id/:id", this.feedbackController.getFeedbackById);
+        router.get("/feedback/user/:userId", this.feedbackController.getFeedbackByUserId);
         router.post("/feedback", this.feedbackController.createFeedback);
+        router.put("/feedback/id/:id", this.feedbackController.updateFeedback);
+        router.delete("/feedback/id/:id", this.feedbackController.deleteFeedback);
         
         return router;
     }
