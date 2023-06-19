@@ -1,7 +1,7 @@
 import { TransactionDTO } from "./transactionDTO";
 
 export interface TransactionQueryInterface{
-    getAllTransactions(): Promise<TransactionDTO[]>;
+    getAllTransactions(limit: number, offset: number): Promise<TransactionDTO[]>;
 
     getTransactionById(id: string): Promise<TransactionDTO>;
 }

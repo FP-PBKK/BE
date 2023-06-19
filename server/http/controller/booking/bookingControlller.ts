@@ -2,16 +2,21 @@ import { BookingService } from "../../../../app/domain/booking/service/bookingSe
 import { BookingCommand } from "../../../../app/domain/booking/command/bookingCommand";
 import { BookingRepository } from "../../../../app/domain/booking/repository/bookingRepository";
 import { Request, Response } from "express";
+import { getPagination, getPagingData } from "../../../../app/shared/paginationUtils";
 
 export class BookingController {
 
     async getAllBooking(req: Request, res: Response){
         try{
-            const bookingData = await new BookingService().getAllBookingsAndReferences();
+            const { page, size } = req.query;
+            const { limit, offset } = getPagination(page as unknown as number, size as unknown as number);
+            // const bookingData = await new BookingService().getAllBookingsAndReferences();
+            const bookingData = await new BookingService().getAllBookingsAndReferences(limit as number, offset as number);
+            const data = getPagingData(bookingData, page as unknown as number, limit as unknown as number);
             return res.status(200).json({
                 status: 200,
                 message: "Success",
-                data: bookingData
+                data: data
             });
         }
         catch(err){

@@ -4,11 +4,17 @@ import { sequelize } from "../../../../../config/database";
 import { getDateRange } from "../../../../shared/dateUtils";
 
 export class TransactionQuery implements TransactionQueryInterface {
-    async getAllTransactions(): Promise<TransactionDTO[]> {
+    async getAllTransactions(limit: number, offset: number): Promise<TransactionDTO[]> {
         try{
             const sql = `SELECT * FROM transactions
-                        ORDER BY createdAt ASC`;
-            const fetchData = await sequelize.query(sql);
+                        ORDER BY createdAt ASC
+                        LIMIT :offset , :limit`;
+            const fetchData = await sequelize.query(sql, {
+                replacements: {
+                    limit: limit,
+                    offset: offset
+                }
+            });
             const data: TransactionDTO[] = [];
             if(!fetchData[0]){
                 return data;

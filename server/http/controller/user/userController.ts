@@ -7,14 +7,14 @@ export class UserController {
 
     async getAllUser(req: Request, res: Response) {
         try {
-            // const { page, size, limit } = req.query;
-            // const { limit: _limit, offset: _offset } = getPagination(page as unknown as number, size as unknown as number);
-            const result = await new UserRepository().getAllUser();
-            // const data = getPagingData(result, page as unknown as number, limit as unknown as number);
+            const { page, size } = req.query;
+            const { limit, offset } = getPagination(page as unknown as number, size as unknown as number);
+            const result = await new UserRepository().getAllUser(limit as number, offset as number);
+            const data = getPagingData(result, page as unknown as number, limit as unknown as number);
             res.status(200).send({
                 status: 200,
                 message: "Success",
-                data: result
+                data: data
             });
         } catch (error) {
             res.status(500).send({

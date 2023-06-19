@@ -3,11 +3,17 @@ import { BookingDTO } from "../../../../application/query/booking/bookingDTO";
 import { sequelize } from "../../../../../config/database";
 
 export class BookingQuery implements BookingQueryInterface {
-    async getAllBooking(): Promise<BookingDTO[]> {
+    async getAllBooking(limit:number, offset:number): Promise<BookingDTO[]> {
         try{
             const bookingSql = `SELECT * FROM bookings
-                                ORDER BY createdAt ASC`;
-            const bookingFetchData = await sequelize.query(bookingSql);
+                                ORDER BY createdAt ASC
+                                LIMIT :offset , :limit`;
+            const bookingFetchData = await sequelize.query(bookingSql, {
+                replacements: {
+                    limit: limit,
+                    offset: offset
+                }
+            });
             const bookingData: BookingDTO[] = [];
             if(!bookingFetchData[0]){
                 return bookingData;

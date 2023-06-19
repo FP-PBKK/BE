@@ -4,13 +4,19 @@ import { sequelize } from "../../../../../config/database";
 
 export class UserQuery implements UserQueryInterface {
     
-    async getAllUser(): Promise<UserDTO[]> {
+    async getAllUser(limit: number, offset: number): Promise<UserDTO[]> {
         try{
             const sql = `SELECT users.*, roles.name AS role_name
                             FROM users
                             LEFT JOIN roles ON users.role_id = roles.id
+                            LIMIT :offset , :limit
                             `;
-            const fetchData = sequelize.query(sql);
+            const fetchData = sequelize.query(sql, {
+                replacements: {
+                    limit : limit, 
+                    offset : offset
+                }
+            });
             return fetchData.then((res: any) => {
                 const data: UserDTO[] = [];
                 if(!res[0]){

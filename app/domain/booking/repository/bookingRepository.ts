@@ -7,9 +7,9 @@ export class BookingRepository {
         this.bookingQuery = new BookingQuery();
     }
 
-    async getAllBooking(){
+    async getAllBooking(limit: number, offset: number) {
         try{
-            return await this.bookingQuery.getAllBooking();
+            return await this.bookingQuery.getAllBooking(limit, offset);
         }
         catch(err){
             throw err;

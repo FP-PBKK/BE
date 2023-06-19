@@ -7,9 +7,9 @@ export class TransactionRepository {
         this.transactionQuery = new TransactionQuery();
     }
 
-    async getAllTransactions(): Promise<any[]> {
+    async getAllTransactions(limit: number, offset: number): Promise<any[]> {
         try{
-            const data = await this.transactionQuery.getAllTransactions();
+            const data = await this.transactionQuery.getAllTransactions(limit, offset);
             return data;
         }
         catch(err){

@@ -22,9 +22,9 @@ export class BookingService {
         this.transactionRepository = new TransactionRepository();
     }
 
-    async getAllBookingsAndReferences(){
+    async getAllBookingsAndReferences(limit: number, offset: number){
         try{
-            const bookingData = await this.bookingRepository.getAllBooking();
+            const bookingData = await this.bookingRepository.getAllBooking(limit, offset);
             //loop for find child data
             for(let i = 0; i < bookingData.length; i++){
                 //user

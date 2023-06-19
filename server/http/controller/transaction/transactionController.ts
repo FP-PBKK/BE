@@ -1,12 +1,16 @@
 import { TransactionRepository } from "../../../../app/domain/transaction/repository/transactionRepository";
 import { TransactionCommand } from "../../../../app/domain/transaction/commands/transactionCommand";
 import { Request, Response } from "express";
+import { getPagination, getPagingData } from "../../../../app/shared/paginationUtils";
 
 export class TransactionController {
 
     async getAllTransactions(req: Request, res: Response){
         try{
-            const data = await new TransactionRepository().getAllTransactions();
+            const { page, size } = req.query;
+            const { limit, offset } = getPagination(page as unknown as number, size as unknown as number);
+            const result = await new TransactionRepository().getAllTransactions(limit as number, offset as number);
+            const data = getPagingData(result, page as unknown as number, limit as unknown as number);
             res.status(200).json({
                 status: 200,
                 message: "Success",
