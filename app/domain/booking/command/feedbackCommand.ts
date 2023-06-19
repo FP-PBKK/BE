@@ -20,4 +20,25 @@ export class FeedbackCommmand {
             throw err;
         }
     }
+
+    async updateFeedback(id: string, data: any){
+        try{
+            const feedbackModel = new FeedbackModel(id, data.user_id, data.booking_id, data.comment, data.rate);
+            const updateFeedbackRes = await this.feedbackQuery.updateFeedback(id, feedbackModel.getDataFeedback());
+            return updateFeedbackRes;
+        }
+        catch(err){
+            throw err;
+        }
+    }
+
+    async deleteFeedback(id: string){
+        try{
+            const deleteFeedbackRes = await this.feedbackQuery.deleteFeedback(id);
+            return deleteFeedbackRes;
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

@@ -66,4 +66,56 @@ export class FeedbackQuery implements FeedbackQueryInterface{
             throw err;
         }
     }
+
+    async getFeedbackByUserId(userId: string): Promise<FeedbackDTO[]> {
+        const sql = `SELECT * FROM feedbacks WHERE user_id = :user_id
+                    ORDER BY createdAt ASC`;
+        const fetchData = sequelize.query(sql, {
+            replacements: {
+                user_id: userId
+            }
+        });
+        return fetchData.then((element: any) => {
+            const feedbackData: FeedbackDTO[] = [];
+            if(!element[0][0]){
+                return feedbackData;
+            }
+            element[0].forEach((element: any) => {
+                feedbackData.push(new FeedbackDTO(element.id, element.user_id, element.booking_id, element.comment, element.rate, element.createdAt, element.updatedAt));
+            });
+            return feedbackData;
+        });
+    }
+
+    async updateFeedback(id: string, feedback: any): Promise<any> {
+        const sql = `UPDATE feedbacks 
+                    SET 
+                    comment = IF(:comment IS NULL, comment, :comment),
+                    rate = IF(:rate IS NULL, rate, :rate),
+                    updatedAt = IF(:updatedAt IS NULL, updatedAt, :updatedAt) 
+                    WHERE id = :id`;
+        const response = sequelize.query(sql, {
+            replacements: {
+                id: id,
+                comment: feedback.comment || null,
+                rate: feedback.rate || null,
+                updatedAt: feedback.updatedAt || null
+            }
+        });
+        return response.then((element: any) => {
+            return element[1];
+        });
+    }
+
+    async deleteFeedback(id: string): Promise<any> {
+        const sql = `DELETE FROM feedbacks WHERE id = :id`;
+        const response = sequelize.query(sql, {
+            replacements: {
+                id: id
+            }
+        });
+        return response.then((element: any) => {
+            return element[1];
+        });
+    }
 }
