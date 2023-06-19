@@ -10,9 +10,9 @@ export class UserRepository {
         this.authQuery = new AuthQuery();
     }
 
-    async getAllUser() {
+    async getAllUser(limit: number, offset: number) {
         try{
-            return await this.userQuery.getAllUser();
+            return await this.userQuery.getAllUser(limit, offset);
         }
         catch(err){
             throw err;

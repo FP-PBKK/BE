@@ -1,7 +1,7 @@
 import { UserDTO } from "./userDTO";
 
 export interface UserQueryInterface {
-    getAllUser(): Promise<UserDTO[]>;
+    getAllUser(limit: number, offset: number): Promise<UserDTO[]>;
 
     getUserById(id: string): Promise<UserDTO>;
 

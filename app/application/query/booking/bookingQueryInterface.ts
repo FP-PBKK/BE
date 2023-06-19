@@ -1,7 +1,7 @@
 import { BookingDTO } from "./bookingDTO";
 
 export interface BookingQueryInterface{
-    getAllBooking(): Promise<BookingDTO[]>;
+    getAllBooking(limit:number, offset:number): Promise<BookingDTO[]>;
     getBookingById(id: string): Promise<BookingDTO>;
     getBookingByUserId(userId: string): Promise<BookingDTO[]>;
     createBooking(data: any);
