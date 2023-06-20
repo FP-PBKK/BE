@@ -19,7 +19,7 @@ export class BookingQuery implements BookingQueryInterface {
                 return bookingData;
             }
             bookingFetchData[0].forEach((element: any) => {
-                bookingData.push(new BookingDTO(element.id, element.user_id, element.schedules_id, element.packages_id, element.booking_status, element.date, element.note, element.createdAt, element.updatedAt));
+                bookingData.push(new BookingDTO(element.id, element.user_id, element.schedules_id, element.packages_id, element.booking_status, element.date, element.createdAt, element.updatedAt, element.note));
             });
             return bookingData;
         }
@@ -39,9 +39,9 @@ export class BookingQuery implements BookingQueryInterface {
             });
             return fetchData.then((element: any) => {
                 if(!element[0][0]){
-                    return new BookingDTO('', '', '', '', '', '');
+                    return new BookingDTO('', '', '', '', '', '', '', '');
                 }
-                return new BookingDTO(element[0][0].id, element[0][0].user_id, element[0][0].schedules_id, element[0][0].packages_id, element[0][0].booking_status, element[0][0].date, element[0][0].note, element[0][0].createdAt, element[0][0].updatedAt);
+                return new BookingDTO(element[0][0].id, element[0][0].user_id, element[0][0].schedules_id, element[0][0].packages_id, element[0][0].booking_status, element[0][0].date, element[0][0].createdAt, element[0][0].updatedAt, element[0][0].note);
             });
         }
         catch(err){
@@ -64,7 +64,7 @@ export class BookingQuery implements BookingQueryInterface {
                     return bookingData;
                 }
                 element[0].forEach((element: any) => {
-                    bookingData.push(new BookingDTO(element.id, element.user_id, element.schedules_id, element.packages_id, element.booking_status, element.date, element.note, element.createdAt, element.updatedAt));
+                    bookingData.push(new BookingDTO(element.id, element.user_id, element.schedules_id, element.packages_id, element.booking_status, element.date, element.createdAt, element.updatedAt, element.note));
                 });
                 return bookingData;
             });
