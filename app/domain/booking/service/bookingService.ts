@@ -84,4 +84,37 @@ export class BookingService {
             throw err;
         }
     }
+
+    async getBookingByUserIdAndReferences(userId: string){
+        try{
+            const bookingData = await this.bookingRepository.getBookingByUserId(userId);
+            //loop for find child data
+            for(let i = 0; i < bookingData.length; i++){
+                //user
+                if(bookingData[i].idUser){
+                    const userData = await this.userRepository.getUserById(bookingData[i].idUser as string);
+                    bookingData[i].user = userData;
+                }                
+                //package
+                if(bookingData[i].idPackage){
+                    const packageData = await this.packageRepository.getPackageById(bookingData[i].idPackage as string);
+                    bookingData[i].packagePhoto = packageData;
+                }          
+                //schedule
+                if(bookingData[i].idSchedule){
+                    const scheduleData = await this.scheduleRepository.getScheduleById(bookingData[i].idSchedule as string);
+                    bookingData[i].schedule = scheduleData;
+                }
+                //additional item
+                if(bookingData[i].id){
+                    const additionalItemData = await this.bookingAdditionalItemRepository.getBookingAdditionalItemByBookingId(bookingData[i].id as string);
+                    bookingData[i].additionalItem = additionalItemData;
+                }
+            }
+            return bookingData;
+        }
+        catch(err){
+            throw err;
+        }
+    }
 }

@@ -57,7 +57,8 @@ export class BookingController {
     async getBookingByUserId(req: Request, res: Response){
         try{
             const {userId} = req.params;
-            const bookingData = await new BookingRepository().getBookingByUserId(userId);
+            // const bookingData = await new BookingRepository().getBookingByUserId(userId);
+            const bookingData = await new BookingService().getBookingByUserIdAndReferences(userId);
             if(bookingData.length == 0){
                 return res.status(404).json({
                     status: 404,
